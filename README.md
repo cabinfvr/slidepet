@@ -21,11 +21,26 @@ Here are the steps to get started:
 9. Change `Select type of time-based trigger` to `Minutes Timer`.
 10. Change `Select minute interval` to whatever you want. This is how fast your pet will walk.
 11. Change `Failure notification settings` to `Immediately`.
+![](finishedSetup.png)
+*Finished Setup Example*
 12. Click **Save**.
 13. Now, click your Google Account.
 14. **If you get a popup**, click `Advanced` and then `Go to Untitled Project (unsafe)`.
 15. Click **Allow**.
 16. Congrats! 🎉 Your pet is now up and running. Decorate your slide with pictures of them!
+
+---
+
+### How to use the Cheat Menu
+
+1. After installing SlidePet, you should simply be able to open the menu at the top labelled `SlidePet`.
+**Not Working? Troubleshoot Below:**
+1. Click `Extensions` → `Apps Script`.
+2. From the top bar, where it says `petMove` change to `onOpen`.
+![](cheatMenu.png)
+3. Click **Debug**.
+4. Traceback the error.
+5. Need extra help? Check out the useful links section to report a bug.
 
 ---
 
