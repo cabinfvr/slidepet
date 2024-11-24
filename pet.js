@@ -8,12 +8,14 @@
 
 */
 
-let name = 'Hero';
-let type = 'Fox';
-let email_notifications = false;
-let email = 'john@example.com'
 
 function petMove() {
+  const userProperties = PropertiesService.getUserProperties();
+
+  let name = userProperties.getProperty('PET_NAME');
+  let type = userProperties.getProperty('PET_TYPE');
+  let email_notifications = userProperties.getProperty('NOTIFS');;
+  let email = userProperties.getProperty('EMAIL');
   let title = SlidesApp.getActivePresentation().getName();
   let miles = title.split(': ')[1].split('miles')[0]
   SlidesApp.getActivePresentation().setName(`${name} the ${type} has traveled: ${Number(miles) + 5} miles`)
@@ -29,12 +31,77 @@ function onOpen(e) {
   let ui = SlidesApp.getUi();
 
   ui.createMenu('SlidePet')
-    .addItem('Add 5 miles', 'miles5')
-    .addItem('Add 10 miles', 'miles10')
-    .addItem('Add 100 miles', 'miles100')
-    .addItem('Add 1000 miles', 'miles1000')
+    .addItem('Change Pet Name', 'changePetName')
+    .addItem('Change Pet Type', 'changePetType')
+    .addItem('Enable/Disable E-mail Notifications', 'toggleEmail')
+    .addItem('Change E-mail', 'setEmail')
+    .addSeparator()
+    .addSubMenu(ui.createMenu('Cheat Menu')
+        .addItem('Add 5 miles', 'miles5')
+        .addItem('Add 10 miles', 'miles10')
+        .addItem('Add 100 miles', 'miles100')
+        .addItem('Add 1000 miles', 'miles1000')
+    )
 
     .addToUi();
+}
+
+function changePetName() {
+  const userProperties = PropertiesService.getUserProperties();
+  var ui = SlidesApp.getUi();
+
+  var result = ui.prompt(
+    'What do you want to change your Pet Name to?',
+    'It can be funny, or serious. ',
+    ui.ButtonSet.OK,
+  )
+
+  var text = result.getResponseText();
+  userProperties.setProperty('PET_NAME', text);
+}
+
+function changePetType() {
+  const userProperties = PropertiesService.getUserProperties();
+  var ui = SlidesApp.getUi();
+
+  var result = ui.prompt(
+    'What do you want to change your Pet Type to?',
+    'Whatever you want!',
+    ui.ButtonSet.OK,
+  )
+
+  var text = result.getResponseText();
+  userProperties.setProperty('PET_TYPE', text);
+}
+
+function toggleEmail() {
+  const userProperties = PropertiesService.getUserProperties();
+  var ui = SlidesApp.getUi();
+  var result = ui.alert(
+    "E-mail Notifications",
+    "Would you like to enable e-mail notifications? It will only e-mail you every 10,000 miles.",
+    ui.ButtonSet.YES_NO,
+  )
+
+    if (result == ui.Button.YES) {
+      userProperties.setProperty('NOTIFS', true);
+    } else {
+      userProperties.setProperty('NOTIFS', false);
+    }
+}
+
+function setEmail() {
+  const userProperties = PropertiesService.getUserProperties();
+  var ui = SlidesApp.getUi();
+
+  var result = ui.prompt(
+    'Enter your E-mail',
+    'This will never be shared with anyone.',
+    ui.ButtonSet.OK,
+  )
+
+  var text = result.getResponseText();
+  userProperties.setProperty('EMAIL', text);
 }
 
 function miles5() {
