@@ -1,4 +1,4 @@
-![slidepet logo](https://i.imgur.com/GgWkYMF.png)
+![slidepet logo](https://github.com/cabinfvr/slidepet/blob/main/SlidePet.png?raw=true)
 
 # 🦊 Slidepet
 Easily create your own virtual pet, for fun!
